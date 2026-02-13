@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanish ❤️ Sharvari</title>
+<style>
+body{
+  margin:0;
+  padding:0;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle at bottom,#1a2a6c,#16222a);
+  font-family:'Segoe UI',sans-serif;
+  color:white;
+  text-align:center;
+}
+
+/* STARS */
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+  from{opacity:0.2;} to{opacity:1;}
+}
+
+.card{
+  background:rgba(255,255,255,0.1);
+  padding:35px;
+  border-radius:25px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.6);
+  max-width:480px;
+  backdrop-filter:blur(15px);
+  z-index:10;
+}
+.hidden{display:none;}
+
+/* GLOWING NAMES */
+.glow{
+  font-size:2em;
+  font-weight:bold;
+  animation:glow 2s ease-in-out infinite alternate;
+}
+@keyframes glow{
+  from{text-shadow:0 0 10px #ff4da6,0 0 20px #ff4da6;}
+  to{text-shadow:0 0 20px #ff99cc,0 0 30px #ff66b3;}
+}
+
+/* HEART PHOTO FRAME */
+.heart-frame{
+  width:150px;
+  height:150px;
+  margin:15px auto;
+  background:url('sharvari.jpg') center/cover;
+  clip-path:path('M75 130 L20 70 A30 30 0 1 1 75 40 A30 30 0 1 1 130 70 Z');
+  border:3px solid white;
+}
+
+input{padding:10px;border-radius:20px;border:none;text-align:center;}
+button{
+  margin:10px;
+  padding:10px 25px;
+  border:none;
+  border-radius:30px;
+  background:white;
+  color:#ff2e63;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover{transform:scale(1.1) 
+
+.typing{
+  border-right:3px solid white;
+  overflow:hidden;
+  margin-top:15px;
+  font-size:1.1em;
+  min-height:60px;
+  width:100%;
+}
+
+.firework{
+  position:absolute;
+  font-size:25px;
+  animation:explode 1s ease-out forwards;
+}
+@keyframes explode{
+  0%{transform:scale(0);opacity:1;}
+  100%{transform:scale(3);opacity:0;}
+}
+iframe{display:none;}
+</style>
+</head>
+<body>
+
+<!-- PASSWORD -->
+<div class="card" id="loginCard">
+<h2>Private Surprise 🔐</h2>
+<input type="password" id="password" placeholder="Enter password">
+<br>
+<button onclick="checkPassword()">Unlock ❤️</button>
+<p id="error" style="color:#ffb3b3"></p>
+</div>
+
+<!-- MAIN -->
+<div class="card hidden" id="mainCard">
+<div class="glow">Tanish ❤️ Sharvari</div>
+
+<div class="heart-frame"></div>
+
+<div class="typing" id="typingText"></div>
+
+<button onclick="startSurprise()">Click for Surprise 💌</button>
+
+<div id="question" class="hidden">
+🌹 Will you be my Valentine? 🌹<br><br>
+<button onclick="yesAnswer()">Yes ❤️</button>
+<button id="noBtn" onmouseover="moveNo()">No 🙈</button>
+</div>
+
+<div id="finalMsg" class="hidden">
+Forever & Always ❤️✨
+</div>
+</div>
+
+<script>
+const correctPassword="iloveyousharvari"; // change password
+
+function checkPassword(){
+  const entered=document.getElementById('password').value;
+  if(entered===correctPassword){
+    document.getElementById('loginCard').classList.add('hidden');
+    document.getElementById('mainCard').classList.remove('hidden');
+    typeEffect();
+  }else{
+    document.getElementById('error').innerText="Wrong password 💔";
+  }
+}
+
+// CUSTOM TYPING MESSAGE
+const message = "Sharvari, I love you sooo sooo muchhh my bachuuuuuu jab aapne first time mere cheeks pe kiss kiya tha tab i was feeling like actually idk dil garden garden hogya tha bas haha and the first time we hugged it felt like iam in heaven for real i just hope and pray  to god that we stay foreverr and ever love you sooo muchhhh yours cutuuu bachaaaa and i dont know if you will like this or not but its just a small effort from my which is not very perfect and i cant express my love towards you by this but i love you alott bachuuuuuu❤️";
+
+let i = 0;
+let typingStarted = false;
+
+function typeEffect(){
+  if (typingStarted) return; // prevent duplicate typing
+  typingStarted = true;
+
+  const speed = 40;
+  const typingElement = document.getElementById("typingText");
+
+  function type(){
+    if(i < message.length){
+      typingElement.innerHTML += message.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+
+  type();
+}
+
+function startSurprise(){
+  document.getElementById('question').classList.remove('hidden');
+  document.getElementById('music').play();
+}
+
+function yesAnswer(){
+  document.getElementById('finalMsg').classList.remove('hidden');
+  launchFireworks();
+}
+
+function moveNo(){
+  const btn=document.getElementById('noBtn');
+  btn.style.position='absolute';
+  btn.style.left=Math.random()*300+'px';
+  btn.style.top=Math.random()*200+'px';
+}
+
+// FIREWORKS
+function launchFireworks(){
+  for(let i=0;i<15;i++){
+    const fw=document.createElement('div');
+    fw.classList.add('firework');
+    fw.innerHTML='✨';
+    fw.style.left=Math.random()*100+'vw';
+    fw.style.top=Math.random()*100+'vh';
+    document.body.appendChild(fw);
+    setTimeout(()=>fw.remove(),1000);
+  }
+}
+
+// STARS GENERATOR
+for(let i=0;i<100;i++){
+  const star=document.createElement('div');
+  star.classList.add('star');
+  star.style.left=Math.random()*100+'vw';
+  star.style.top=Math.random()*100+'vh';
+  document.body.appendChild(star);
+}
+</script>
+
+<audio id="music" src="waalian.mp3" loop></audio>
+
+</body>
+</html>
