@@ -84,11 +84,12 @@ button:hover{transform:scale(1.1)
   min-height:60px;
   width:100%;
 }
-
-.firework{
-  position:absolute;
-  font-size:25px;
+  .firework{
+  position:fixed;
+  font-size:30px;
+  pointer-events:none;
   animation:explode 1s ease-out forwards;
+  z-index:999;
 }
 @keyframes explode{
   0%{transform:scale(0);opacity:1;}
@@ -186,14 +187,17 @@ function moveNo(){
 
 // FIREWORKS
 function launchFireworks(){
-  for(let i=0;i<15;i++){
+  for(let i=0;i<25;i++){
     const fw=document.createElement('div');
     fw.classList.add('firework');
     fw.innerHTML='✨';
     fw.style.left=Math.random()*100+'vw';
     fw.style.top=Math.random()*100+'vh';
     document.body.appendChild(fw);
-    setTimeout(()=>fw.remove(),1000);
+
+    setTimeout(()=>{
+      fw.remove();
+    },1000);
   }
 }
 
@@ -211,4 +215,5 @@ for(let i=0;i<100;i++){
 
 </body>
 </html>
+
 
